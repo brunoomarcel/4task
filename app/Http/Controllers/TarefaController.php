@@ -21,6 +21,12 @@ class TarefaController extends Controller
     // Função para armazenar a nova tarefa
     public function store(Request $request)
     {
+        $valor = $request->input('status');
+
+        if ($valor == '') { //verificar se valor enviado é nulo
+            $request->merge(['status' => 'pendente']);
+        }
+
         $request->validate([
             'titulo' => 'required|max:255',
             'descricao' => 'nullable',
