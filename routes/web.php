@@ -11,3 +11,4 @@ use App\Http\Controllers\TarefaController;
 
  Route::resource('tarefas', TarefaController::class);  // Rotas para o recurso Tarefa
  Route::post('tarefas/{id}/concluir', [TarefaController::class, 'concluir'])->name('tarefas.concluir');
+ Route::delete('tarefas/{id}', [TarefaController::class, 'destroy'])->name('tarefas.destroy');

@@ -8,14 +8,13 @@ class TarefaController extends Controller
 {
     public function index()
     {
-        $tarefas = Tarefa::all();  // Recupera todas as tarefas do banco de dados
-        return view('tarefas.index', compact('tarefas'));  // Passa as tarefas para a view
+        $tarefas = Tarefa::all();
+        return view('tarefas.index', compact('tarefas'));
     }
 
-    // Função para exibir o formulário de criação
     public function create()
     {
-        return view('tarefas.create');  // Retorna a view de criação de tarefa
+        return view('tarefas.create');
     }
 
     // Função para armazenar a nova tarefa
@@ -33,15 +32,15 @@ class TarefaController extends Controller
             'status' => 'required|in:pendente,concluída',
         ]);
 
-        Tarefa::create($request->all());  // Cria a nova tarefa com os dados do formulário
+        Tarefa::create($request->all());
 
-        return redirect()->route('tarefas.index')->with('success', 'Tarefa adicionada com sucesso!');  // Redireciona para a lista de tarefas
+        return redirect()->route('tarefas.index')->with('success', 'Tarefa adicionada com sucesso!');
     }
 
     // Exibir o formulário de edição
     public function edit($id)
     {
-        $tarefa = Tarefa::findOrFail($id); // Encontrar a tarefa pelo ID
+        $tarefa = Tarefa::findOrFail($id);
         return view('tarefas.edit', compact('tarefa')); // Retornar a view de edição com a tarefa
     }
 
@@ -54,21 +53,28 @@ class TarefaController extends Controller
             'status' => 'required|in:pendente,concluída',
         ]);
 
-        $tarefa = Tarefa::findOrFail($id); // Encontrar a tarefa pelo ID
-        $tarefa->update($request->all()); // Atualizar a tarefa com os novos dados
+        $tarefa = Tarefa::findOrFail($id);
+        $tarefa->update($request->all());
 
-        return redirect()->route('tarefas.index')->with('success', 'Tarefa atualizada com sucesso!'); // Redirecionar com mensagem de sucesso
+        return redirect()->route('tarefas.index')->with('success', 'Tarefa atualizada com sucesso!');
     }
 
     //alterar status para concluída
     public function concluir($id)
     {
-        $tarefa = Tarefa::findOrFail($id); // Encontrar a tarefa pelo ID
-        $tarefa->status = 'concluída'; // Alterar o status para 'concluída'
-        $tarefa->save(); // Salvar as alterações
+        $tarefa = Tarefa::findOrFail($id);
+        $tarefa->status = 'concluída';
+        $tarefa->save();
 
-        return redirect()->route('tarefas.index')->with('success', 'Tarefa marcada como concluída!'); // Redirecionar com mensagem de sucesso
+        return redirect()->route('tarefas.index')->with('success', 'Tarefa marcada como concluída!');
     }
 
+    public function destroy($id)
+    {
+        $tarefa = Tarefa::findOrFail($id); // Encontrar a tarefa pelo ID
+        $tarefa->delete(); // realiza o soft delete
+
+        return redirect()->route('tarefas.index')->with('success', 'Tarefa excluída com sucesso!');
+    }
 
 }
