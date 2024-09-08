@@ -10,3 +10,5 @@ use App\Http\Controllers\TarefaController;
  */
 
 Route::get('/', [TarefaController::class, 'index']);
+
+Route::get('tarefas', [TarefaController::class, 'index'])->name('tarefas.index');
