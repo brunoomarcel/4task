@@ -9,6 +9,5 @@ use App\Http\Controllers\TarefaController;
  * Adicione e modifique rotas conforme necessário
  */
 
-Route::get('/', [TarefaController::class, 'index']);
-
-Route::get('tarefas', [TarefaController::class, 'index'])->name('tarefas.index');
+ Route::resource('tarefas', TarefaController::class);  // Rotas para o recurso Tarefa
+ Route::post('tarefas/{id}/concluir', [TarefaController::class, 'concluir'])->name('tarefas.concluir');
