@@ -1,0 +1,29 @@
+.table-responsive{
+    overflow-x: auto;
+}
+
+footer{
+    text-align: center;
+}
+
+.copywright{
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .copywright{
+        justify-content: center;
+    }
+
+    h1{
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    h4{
+        margin: 20px 0;
+        font-weight: 400;
+    }
+}
